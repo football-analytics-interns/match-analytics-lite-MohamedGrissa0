@@ -49,13 +49,13 @@ export class DashboardComponent {
     return this.players().map(p => {
       const goals = this.events().filter(e => e.type === 'GOAL' && e.playerId === p.id).length;
       const assists = this.events().filter(
-        e => e.type === 'GOAL' && e.meta?.assistId === p.id // safe check with optional chaining
+        e => e.type === 'GOAL' && e.meta?.assistId === p.id 
       ).length;
       const shots = this.events().filter(
-        e => e.type === 'SHOT' && e.playerId === p.id // safe check with optional chaining
+        e => e.type === 'SHOT' && e.playerId === p.id 
       ).length;
       const tackles = this.events().filter(
-        e => e.type === 'TACKLE' && e.playerId === p.id // safe check with optional chaining
+        e => e.type === 'TACKLE' && e.playerId === p.id 
       ).length;
       const rating = 6 + goals * 1.5 + assists*1 + tackles*0.5 + shots*0.3; // simplified formula
       return { ...p, goals, assists,shots,tackles, rating: rating.toFixed(1) };
@@ -63,7 +63,6 @@ export class DashboardComponent {
   });
 
 
-  // chart config
   chartData: ChartConfiguration<'bar'>['data'] = {
     labels: [],
     datasets: [
@@ -94,7 +93,6 @@ export class DashboardComponent {
         if (players) this.players.set(players);
         if (events) this.events.set(events);
 
-        // update chart once data is loaded
         const stats = this.playerStats();
         this.chartData.labels = stats.map(p => p.name);
         this.chartData.datasets[0].data = stats.map(p => p.goals);
