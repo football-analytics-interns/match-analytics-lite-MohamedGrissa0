@@ -17,7 +17,7 @@
   "events": [
     { "minute": 12, "type": "GOAL", "playerId": 1, "meta": {"assistId": 2} },
     { "minute": 43, "type": "SHOT", "playerId": 1, "meta": {"onTarget": true} },
-    { "minute": 67, "type": "GOAL", "playerId": 11, "meta": {} },
+      { "minute": 67, "type": "GOAL", "playerId": 11, "meta": {} },
     { "minute": 75, "type": "TACKLE", "playerId": 3, "meta": {} }
   ]
 }

@@ -1,0 +1,56 @@
+<div class="container">
+  <!-- Loading -->
+  <div *ngIf="loading()">⏳ Loading match data...</div>
+
+  <!-- Error -->
+  <div *ngIf="error()" class="error">{{ error() }}</div>
+
+  <!-- Dashboard -->
+  <div *ngIf="!loading() && !error() && match()">
+    <!-- Match Info -->
+    <!-- <h2>{{ match()?.homeTeam }} {{ match()?.homeScore }} - {{ match()?.awayScore }} {{ match()?.awayTeam }}</h2>
+    <p>{{ match()?.date | date:'medium' }}</p> -->
+
+    <div class="dashboard-grid">
+      <!-- Player Stats Table -->
+      <div class="card">
+        <h3>Player Stats</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Team</th>
+              <th>Goals</th>
+              <th>Assists</th>
+              <th>Shots</th>
+              <th>Tackles</th>
+
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of playerStats()">
+              <td>{{ p.name }}</td>
+              <td>{{ p.team }}</td>
+              <td>{{ p.goals }}</td>
+              <td>{{ p.assists }}</td>
+              <td>{{ p.shots }}</td>
+              <td>{{ p.tackles }}</td>
+
+              <td>{{ p.rating }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Goals/Assists Chart -->
+      <div class="card">
+        <h3>Goals & Assists</h3>
+        <canvas baseChart
+          [data]="chartData"
+          [type]="chartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
