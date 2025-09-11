@@ -1,18 +1,14 @@
 <div class="max-w-7xl mx-auto p-6">
-  <!-- Loading -->
   <div *ngIf="loading()" class="text-center text-gray-500 text-lg">
     ⏳ Loading match data...
   </div>
 
-  <!-- Error -->
   <div *ngIf="error()" class="text-center text-red-500 font-semibold">
     {{ error() }}
   </div>
 
-  <!-- Dashboard -->
   <div *ngIf="!loading() && !error() && match()" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
     
-    <!-- Player Stats Table -->
     <div class="bg-white rounded-2xl shadow p-6 dark:bg-gray-900">
       <h3 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Player Stats</h3>
       <div class="overflow-x-auto">
@@ -43,7 +39,6 @@
       </div>
     </div>
 
-    <!-- Goals/Assists Chart -->
     <div class="bg-white rounded-2xl shadow p-6 dark:bg-gray-900">
       <h3 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Goals & Assists</h3>
       <canvas baseChart [data]="chartData" [type]="chartType"></canvas>
