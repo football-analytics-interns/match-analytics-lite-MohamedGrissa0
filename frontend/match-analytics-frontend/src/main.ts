@@ -6,7 +6,7 @@ import { AppComponent } from './app/app.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),   // your routes must include DashboardComponent
-    provideHttpClient()      // HttpClient for API calls
+    provideRouter(routes),   
+    provideHttpClient()      
   ]
 }).catch(err => console.error(err));

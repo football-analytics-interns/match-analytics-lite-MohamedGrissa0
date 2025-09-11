@@ -35,14 +35,13 @@ interface Event {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  // signals
+ 
   match = signal<Match | null>(null);
   players = signal<Player[]>([]);
   events = signal<Event[]>([]);
   loading = signal(true);
   error = signal<string | null>(null);
 
-  // computed player stats
   playerStats = computed(() => {
     if (!this.players().length || !this.events().length) return [];
   
