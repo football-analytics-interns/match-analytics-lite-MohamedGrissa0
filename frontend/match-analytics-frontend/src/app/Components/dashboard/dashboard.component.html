@@ -1,0 +1,52 @@
+<div class="max-w-7xl mx-auto p-6">
+  <!-- Loading -->
+  <div *ngIf="loading()" class="text-center text-gray-500 text-lg">
+    ⏳ Loading match data...
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error()" class="text-center text-red-500 font-semibold">
+    {{ error() }}
+  </div>
+
+  <!-- Dashboard -->
+  <div *ngIf="!loading() && !error() && match()" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+    
+    <!-- Player Stats Table -->
+    <div class="bg-white rounded-2xl shadow p-6 dark:bg-gray-900">
+      <h3 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Player Stats</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead class="bg-gray-100 dark:bg-gray-800">
+            <tr>
+              <th class="p-3 text-left">Player</th>
+              <th class="p-3 text-left">Team</th>
+              <th class="p-3 text-center">Goals</th>
+              <th class="p-3 text-center">Assists</th>
+              <th class="p-3 text-center">Shots</th>
+              <th class="p-3 text-center">Tackles</th>
+              <th class="p-3 text-center">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of playerStats()" class="border-b hover:bg-gray-50 dark:hover:bg-gray-800">
+              <td class="p-3">{{ p.name }}</td>
+              <td class="p-3">{{ p.team }}</td>
+              <td class="p-3 text-center">{{ p.goals }}</td>
+              <td class="p-3 text-center">{{ p.assists }}</td>
+              <td class="p-3 text-center">{{ p.shots }}</td>
+              <td class="p-3 text-center">{{ p.tackles }}</td>
+              <td class="p-3 text-center font-medium">{{ p.rating }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Goals/Assists Chart -->
+    <div class="bg-white rounded-2xl shadow p-6 dark:bg-gray-900">
+      <h3 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Goals & Assists</h3>
+      <canvas baseChart [data]="chartData" [type]="chartType"></canvas>
+    </div>
+  </div>
+</div>

@@ -47,30 +47,33 @@ export class DashboardComponent {
   
     return this.players().map(p => {
       const goals = this.events().filter(e => e.type === 'GOAL' && e.playerId === p.id).length;
-      const assists = this.events().filter(
-        e => e.type === 'GOAL' && e.meta?.assistId === p.id 
-      ).length;
-      const shots = this.events().filter(
-        e => e.type === 'SHOT' && e.playerId === p.id 
-      ).length;
-      const tackles = this.events().filter(
-        e => e.type === 'TACKLE' && e.playerId === p.id 
-      ).length;
-      const rating = 6 + goals * 1.5 + assists*1 + tackles*0.5 + shots*0.3; // simplified formula
-      return { ...p, goals, assists,shots,tackles, rating: rating.toFixed(1) };
+  
+      const assists = this.events().filter(e => {
+        let meta: any = {};
+        try {
+          meta = JSON.parse(e.meta); 
+        } catch {}
+        return e.type === 'GOAL' && Number(meta?.assistId) === p.id;
+      }).length;
+  
+      const shots = this.events().filter(e => e.type === 'SHOT' && e.playerId === p.id).length;
+      const tackles = this.events().filter(e => e.type === 'TACKLE' && e.playerId === p.id).length;
+  
+      const rating = 6 + goals * 1.5 + assists * 1 + tackles * 0.5 + shots * 0.3;
+      return { ...p, goals, assists, shots, tackles, rating: rating.toFixed(1) };
     });
   });
-
+  
 
   chartData: ChartConfiguration<'bar'>['data'] = {
     labels: [],
     datasets: [
-      { label: 'Goals', data: [], backgroundColor: '#4caf50' },
-      { label: 'Assists', data: [], backgroundColor: '#2196f3' },
-      { label: 'Shots', data: [], backgroundColor: '#13aff0' },
-      { label: 'Tackles', data: [], backgroundColor: '#22ff00' },
-
+      { label: 'Goals',   data: [], backgroundColor: '#ef4444' },
+      { label: 'Assists', data: [], backgroundColor: '#3b82f6' }, 
+      { label: 'Shots',   data: [], backgroundColor: '#f59e0b' }, 
+      { label: 'Tackles', data: [], backgroundColor: '#10b981' }, 
     ]
+    
   };
   chartType: ChartType = 'bar';
 
